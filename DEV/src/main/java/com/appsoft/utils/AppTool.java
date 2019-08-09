@@ -13,6 +13,7 @@ public class AppTool {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         Base64.Encoder base64Encoder = Base64.getEncoder();
         // 加密字符串
+        
         return base64Encoder.encodeToString(md5.digest(string.getBytes("utf-8")));
     }
 
