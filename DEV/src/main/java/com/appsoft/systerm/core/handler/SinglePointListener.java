@@ -16,14 +16,9 @@ import com.appsoft.systerm.core.yh.LoginUser;
 /**
  * 
  * 单点登录
- * 
  * 监控session中属性user的变化
- * 
  * HttpSessionAttributeListener 监听session范围内属性变化
- * 
  * @author maybe
- *
- * 
  * 
  */
 
@@ -43,7 +38,7 @@ public class SinglePointListener implements HttpSessionAttributeListener {
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent httpSessionBindingEvent) {
 
-		LoginUser user = (LoginUser) httpSessionBindingEvent.getSession().getAttribute("userid");
+		LoginUser user = (LoginUser) httpSessionBindingEvent.getSession().getAttribute("user");
 
 		if (user != null) {// 登录时需要把user信息放入session以供后续使用。session其他值得变化，不在本方法考虑范围内，
 

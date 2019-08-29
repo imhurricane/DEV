@@ -20,4 +20,5 @@ public class AppTool {
 	public static String getUUID() {
 		return UUID.randomUUID().toString().replaceAll("-", "").replaceAll(" ", "");
 	}
+	
 }

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public class ApplicationFilter implements Filter {
 
 	private final Logger log = LoggerFactory.getLogger(ApplicationFilter.class);
-	private static final String ERRORURL = "/html/index.html";
+	private static final String ERRORURL = "/";
 
 	/**
 	 * 
@@ -44,9 +44,10 @@ public class ApplicationFilter implements Filter {
 
 		String uri = request.getRequestURI();
 
+		log.info("uri:"+uri);
 		if (!uri.equals(ERRORURL)) {
 
-			log.info("进入判断是否只有单点登录");
+//			log.info("进入判断是否只有单点登录");
 
 			String forcedout = (String) request.getSession().getAttribute("forcedout");
 

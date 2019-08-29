@@ -79,7 +79,7 @@ form button:hover {
 				<input type="text" name="yhm" id="yhm" placeholder="请输入账号" /> 
 				<input type="passWord" name="passWord" id="passWord" placeholder="请输入密码">
 				<button onclick="dengLu()" id="denglu">登&nbsp;&nbsp;录</button>
-				<!-- <button  onclick="save()">注&nbsp;&nbsp;册</button> -->
+				<button  onclick="save()">注&nbsp;&nbsp;册</button>
 			</form>
 		</div>
 	</div>
@@ -116,7 +116,7 @@ form button:hover {
 			document.getElementById("passWord").focus();
 			return;
 	  }
-	  document.forms['loginform'].action="/login/login";
+	  document.forms['loginform'].action="/userInfo/login";
 	  document.forms['loginform'].submit();
 	}
 	

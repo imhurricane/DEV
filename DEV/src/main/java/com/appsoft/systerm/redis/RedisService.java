@@ -24,7 +24,7 @@ import org.springframework.util.CollectionUtils;
 public final class RedisService {
 
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private RedisTemplate<String, Object> redis;
 
 	// =============================common============================
 
@@ -46,7 +46,7 @@ public final class RedisService {
 
 			if (time > 0) {
 
-				redisTemplate.expire(key, time, TimeUnit.SECONDS);
+				redis.expire(key, time, TimeUnit.SECONDS);
 
 			}
 
@@ -74,7 +74,7 @@ public final class RedisService {
 
 	public long getExpire(String key) {
 
-		return redisTemplate.getExpire(key, TimeUnit.SECONDS);
+		return redis.getExpire(key, TimeUnit.SECONDS);
 
 	}
 
@@ -92,7 +92,7 @@ public final class RedisService {
 
 		try {
 
-			return redisTemplate.hasKey(key);
+			return redis.hasKey(key);
 
 		} catch (Exception e) {
 
@@ -117,11 +117,11 @@ public final class RedisService {
 
 			if (key.length == 1) {
 
-				redisTemplate.delete(key[0]);
+				redis.delete(key[0]);
 
 			} else {
 
-				redisTemplate.delete(CollectionUtils.arrayToList(key));
+				redis.delete(CollectionUtils.arrayToList(key));
 
 			}
 
@@ -143,7 +143,7 @@ public final class RedisService {
 
 	public Object get(String key) {
 
-		return key == null ? null : redisTemplate.opsForValue().get(key);
+		return key == null ? null : redis.opsForValue().get(key);
 
 	}
 
@@ -163,7 +163,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForValue().set(key, value);
+			redis.opsForValue().set(key, value);
 
 			return true;
 
@@ -197,7 +197,7 @@ public final class RedisService {
 
 			if (time > 0) {
 
-				redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+				redis.opsForValue().set(key, value, time, TimeUnit.SECONDS);
 
 			} else {
 
@@ -237,7 +237,7 @@ public final class RedisService {
 
 		}
 
-		return redisTemplate.opsForValue().increment(key, delta);
+		return redis.opsForValue().increment(key, delta);
 
 	}
 
@@ -261,7 +261,7 @@ public final class RedisService {
 
 		}
 
-		return redisTemplate.opsForValue().increment(key, -delta);
+		return redis.opsForValue().increment(key, -delta);
 
 	}
 
@@ -281,7 +281,7 @@ public final class RedisService {
 
 	public Object hget(String key, String item) {
 
-		return redisTemplate.opsForHash().get(key, item);
+		return redis.opsForHash().get(key, item);
 
 	}
 
@@ -297,7 +297,7 @@ public final class RedisService {
 
 	public Map<Object, Object> hmget(String key) {
 
-		return redisTemplate.opsForHash().entries(key);
+		return redis.opsForHash().entries(key);
 
 	}
 
@@ -317,7 +317,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForHash().putAll(key, map);
+			redis.opsForHash().putAll(key, map);
 
 			return true;
 
@@ -349,7 +349,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForHash().putAll(key, map);
+			redis.opsForHash().putAll(key, map);
 
 			if (time > 0) {
 
@@ -387,7 +387,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForHash().put(key, item, value);
+			redis.opsForHash().put(key, item, value);
 
 			return true;
 
@@ -421,7 +421,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForHash().put(key, item, value);
+			redis.opsForHash().put(key, item, value);
 
 			if (time > 0) {
 
@@ -453,7 +453,7 @@ public final class RedisService {
 
 	public void hdel(String key, Object... item) {
 
-		redisTemplate.opsForHash().delete(key, item);
+		redis.opsForHash().delete(key, item);
 
 	}
 
@@ -471,7 +471,7 @@ public final class RedisService {
 
 	public boolean hHasKey(String key, String item) {
 
-		return redisTemplate.opsForHash().hasKey(key, item);
+		return redis.opsForHash().hasKey(key, item);
 
 	}
 
@@ -491,7 +491,7 @@ public final class RedisService {
 
 	public double hincr(String key, String item, double by) {
 
-		return redisTemplate.opsForHash().increment(key, item, by);
+		return redis.opsForHash().increment(key, item, by);
 
 	}
 
@@ -511,7 +511,7 @@ public final class RedisService {
 
 	public double hdecr(String key, String item, double by) {
 
-		return redisTemplate.opsForHash().increment(key, item, -by);
+		return redis.opsForHash().increment(key, item, -by);
 
 	}
 
@@ -531,7 +531,7 @@ public final class RedisService {
 
 		try {
 
-			return redisTemplate.opsForSet().members(key);
+			return redis.opsForSet().members(key);
 
 		} catch (Exception e) {
 
@@ -559,7 +559,7 @@ public final class RedisService {
 
 		try {
 
-			return redisTemplate.opsForSet().isMember(key, value);
+			return redis.opsForSet().isMember(key, value);
 
 		} catch (Exception e) {
 
@@ -587,7 +587,7 @@ public final class RedisService {
 
 		try {
 
-			return redisTemplate.opsForSet().add(key, values);
+			return redis.opsForSet().add(key, values);
 
 		} catch (Exception e) {
 
@@ -617,7 +617,7 @@ public final class RedisService {
 
 		try {
 
-			Long count = redisTemplate.opsForSet().add(key, values);
+			Long count = redis.opsForSet().add(key, values);
 
 			if (time > 0)
 
@@ -649,7 +649,7 @@ public final class RedisService {
 
 		try {
 
-			return redisTemplate.opsForSet().size(key);
+			return redis.opsForSet().size(key);
 
 		} catch (Exception e) {
 
@@ -677,7 +677,7 @@ public final class RedisService {
 
 		try {
 
-			Long count = redisTemplate.opsForSet().remove(key, values);
+			Long count = redis.opsForSet().remove(key, values);
 
 			return count;
 
@@ -711,7 +711,7 @@ public final class RedisService {
 
 		try {
 
-			return redisTemplate.opsForList().range(key, start, end);
+			return redis.opsForList().range(key, start, end);
 
 		} catch (Exception e) {
 
@@ -737,7 +737,7 @@ public final class RedisService {
 
 		try {
 
-			return redisTemplate.opsForList().size(key);
+			return redis.opsForList().size(key);
 
 		} catch (Exception e) {
 
@@ -765,7 +765,7 @@ public final class RedisService {
 
 		try {
 
-			return redisTemplate.opsForList().index(key, index);
+			return redis.opsForList().index(key, index);
 
 		} catch (Exception e) {
 
@@ -795,7 +795,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForList().rightPush(key, value);
+			redis.opsForList().rightPush(key, value);
 
 			return true;
 
@@ -827,7 +827,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForList().rightPush(key, value);
+			redis.opsForList().rightPush(key, value);
 
 			if (time > 0)
 
@@ -863,7 +863,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForList().rightPushAll(key, value);
+			redis.opsForList().rightPushAll(key, value);
 
 			return true;
 
@@ -897,7 +897,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForList().rightPushAll(key, value);
+			redis.opsForList().rightPushAll(key, value);
 
 			if (time > 0)
 
@@ -933,7 +933,7 @@ public final class RedisService {
 
 		try {
 
-			redisTemplate.opsForList().set(key, index, value);
+			redis.opsForList().set(key, index, value);
 
 			return true;
 
@@ -965,7 +965,7 @@ public final class RedisService {
 
 		try {
 
-			Long remove = redisTemplate.opsForList().remove(key, count, value);
+			Long remove = redis.opsForList().remove(key, count, value);
 
 			return remove;
 

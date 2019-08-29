@@ -1,23 +1,20 @@
 package com.appsoft.systerm.core.handler;
 
 import javax.servlet.annotation.WebListener;
-
 import javax.servlet.http.HttpSessionEvent;
-
 import javax.servlet.http.HttpSessionListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.appsoft.systerm.core.yh.LoginController;
 import com.appsoft.systerm.core.yh.LoginUser;
+import com.appsoft.systerm.redis.RedisService;
 
 /**
  * 
  * session监听器
- * 
  * 当有session被创建时，会进入该监听器
- * 
  * 比如：request.getSession()，这时候，会进入。
  * 
  * @author maybe
@@ -29,7 +26,8 @@ public class SessionListener implements HttpSessionListener {// 实现HttpSessio
 	
 	private final Logger log = LoggerFactory.getLogger(SessionListener.class);
 	
-	
+	@Autowired
+	private RedisService redis;
 	/**
 	 * 
 	 * session创建时，初始化session
@@ -59,11 +57,11 @@ public class SessionListener implements HttpSessionListener {// 实现HttpSessio
 	@Override
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 
-		LoginUser user = (LoginUser) httpSessionEvent.getSession().getAttribute("userid");
+		LoginUser user = (LoginUser) httpSessionEvent.getSession().getAttribute("user");
 
 		if (user != null)
 			SinglePointListener.map.remove(user.getUserId());// session销毁时，要将session从map中remove掉
-
+//		redis.del(user.getUserId());
 		log.info("Session{}被销毁", httpSessionEvent.getSession().getId());
 
 	}

@@ -1,6 +1,6 @@
 package com.appsoft.systerm.core.yh;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,8 @@ public class LoginService {
 	@Autowired
 	private LoginMapper loginMapper;
 	
-	public List<LoginUser> getUser(){
-		return (List<LoginUser>) loginMapper.login("", "");
+	public ArrayList<LoginUser> getUser(){
+		return (ArrayList<LoginUser>) loginMapper.getUser();
 	};
 	
 	
@@ -22,7 +22,11 @@ public class LoginService {
 	};
 	
 	public int saveUser(LoginUser user) {
-		return 0;
+		return loginMapper.saveUser(user.getUserId(),user.getAge(),user.getSex(),user.getUserLoginName(),user.getUserNameCh(),user.getUserPassword());
 	}
+	
+	public LoginUser getLoginUser(String yhm,String passWord){
+		return loginMapper.login(yhm, passWord);
+	};
 	
 }
