@@ -1,6 +1,9 @@
 package com.appsoft.systerm.core.yh;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,9 +12,12 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
 import com.appsoft.systerm.Response.Contaniner;
 import com.appsoft.systerm.Response.ResponseEntity;
 import com.appsoft.systerm.redis.RedisService;
@@ -57,6 +63,18 @@ public class LoginController {
 //		redis.set(user.getUserId(), session);
 		log.info(loginUser.getUserNameCh());
 		return entity;
+	}
+	
+	@RequestMapping("/loginApp")
+	public JSONObject loginApp(String password, String userName) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		JSONObject object = new JSONObject();
+		String userXtm = AppTool.getUUID();
+		object.put("userXtm", userXtm);
+		object.put("userName", userName);
+		object.put("currentUserXtm", userXtm);
+		object.put("passWord", password);
+		object.put("lastLoginDate", "2019-11-25 10:44:00");
+		return object;
 	}
 	
 	//getAccess
