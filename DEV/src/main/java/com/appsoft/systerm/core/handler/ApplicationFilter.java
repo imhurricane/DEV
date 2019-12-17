@@ -43,7 +43,7 @@ public class ApplicationFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) resp;
 
 		String uri = request.getRequestURI();
-
+		
 		log.info("uri:"+uri);
 		if (!uri.equals(ERRORURL)) {
 

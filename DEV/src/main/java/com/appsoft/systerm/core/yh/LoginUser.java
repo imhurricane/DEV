@@ -2,121 +2,156 @@ package com.appsoft.systerm.core.yh;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
-public class LoginUser implements Serializable{
+import org.hibernate.annotations.GenericGenerator;
 
-	private static final long serialVersionUID = -2113201070938218262L;
+@Entity
+public class LoginUser implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@Column(length = 32)
-	private String userId; 
+	@GeneratedValue(generator = "faceset_generator")
+	@GenericGenerator(name = "faceset_generator", strategy = "uuid")
+	private String userId;
 	private String userLoginName;
 	private String userPassword;
 	private String userNameCh;
 	private String userEmail;
 	private String userPhonenum;
-	private String lastLoginTime = "";//最后登录时间
+	private String lastLoginTime = "";// 最后登录时间
 	private String lastOperateTime = "";// 最后操作的时间
 	private String lastLogoutTime;
 	private String userOrgId;// orgid
 	private String userSiteId;// sitextm
 	private String xtID;
-	private String sex;
+	private boolean sex;
 	private int age;
 	private String deptName;
-	public final String getUserId() {
+
+	public String getUserId() {
 		return userId;
 	}
-	public final void setUserId(String userId) {
+
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public final String getUserLoginName() {
+
+	public String getUserLoginName() {
 		return userLoginName;
 	}
-	public final void setUserLoginName(String userLoginName) {
+
+	public void setUserLoginName(String userLoginName) {
 		this.userLoginName = userLoginName;
 	}
-	public final String getUserPassword() {
+
+	public String getUserPassword() {
 		return userPassword;
 	}
-	public final void setUserPassword(String userPassword) {
+
+	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public final String getUserNameCh() {
+
+	public String getUserNameCh() {
 		return userNameCh;
 	}
-	public final void setUserNameCh(String userNameCh) {
+
+	public void setUserNameCh(String userNameCh) {
 		this.userNameCh = userNameCh;
 	}
-	public final String getUserEmail() {
+
+	public String getUserEmail() {
 		return userEmail;
 	}
-	public final void setUserEmail(String userEmail) {
+
+	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public final String getUserPhonenum() {
+
+	public String getUserPhonenum() {
 		return userPhonenum;
 	}
-	public final void setUserPhonenum(String userPhonenum) {
+
+	public void setUserPhonenum(String userPhonenum) {
 		this.userPhonenum = userPhonenum;
 	}
-	public final String getLastLoginTime() {
+
+	public String getLastLoginTime() {
 		return lastLoginTime;
 	}
-	public final void setLastLoginTime(String lastLoginTime) {
+
+	public void setLastLoginTime(String lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
-	public final String getLastOperateTime() {
+
+	public String getLastOperateTime() {
 		return lastOperateTime;
 	}
-	public final void setLastOperateTime(String lastOperateTime) {
+
+	public void setLastOperateTime(String lastOperateTime) {
 		this.lastOperateTime = lastOperateTime;
 	}
-	public final String getLastLogoutTime() {
+
+	public String getLastLogoutTime() {
 		return lastLogoutTime;
 	}
-	public final void setLastLogoutTime(String lastLogoutTime) {
+
+	public void setLastLogoutTime(String lastLogoutTime) {
 		this.lastLogoutTime = lastLogoutTime;
 	}
-	public final String getUserOrgId() {
+
+	public String getUserOrgId() {
 		return userOrgId;
 	}
-	public final void setUserOrgId(String userOrgId) {
+
+	public void setUserOrgId(String userOrgId) {
 		this.userOrgId = userOrgId;
 	}
-	public final String getUserSiteId() {
+
+	public String getUserSiteId() {
 		return userSiteId;
 	}
-	public final void setUserSiteId(String userSiteId) {
+
+	public void setUserSiteId(String userSiteId) {
 		this.userSiteId = userSiteId;
 	}
-	public final String getXtID() {
+
+	public String getXtID() {
 		return xtID;
 	}
-	public final void setXtID(String xtID) {
+
+	public void setXtID(String xtID) {
 		this.xtID = xtID;
 	}
-	public final String getSex() {
+
+	public boolean getSex() {
 		return sex;
 	}
-	public final void setSex(String sex) {
+
+	public void setSex(boolean sex) {
 		this.sex = sex;
 	}
-	public final int getAge() {
+
+	public int getAge() {
 		return age;
 	}
-	public final void setAge(int age) {
+
+	public void setAge(int age) {
 		this.age = age;
 	}
-	public final String getDeptName() {
+
+	public String getDeptName() {
 		return deptName;
 	}
-	public final void setDeptName(String deptName) {
+
+	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
+
 	@Override
 	public String toString() {
 		return "LoginUser [userId=" + userId + ", userLoginName=" + userLoginName + ", userPassword=" + userPassword
@@ -125,6 +160,5 @@ public class LoginUser implements Serializable{
 				+ lastLogoutTime + ", userOrgId=" + userOrgId + ", userSiteId=" + userSiteId + ", xtID=" + xtID
 				+ ", sex=" + sex + ", age=" + age + ", deptName=" + deptName + "]";
 	}
-	
-	
+
 }
